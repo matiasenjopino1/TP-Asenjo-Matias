@@ -16,10 +16,12 @@ class Productos extends CI_Controller
         $this->load->view('productos_listado',$datos);
     }
 
-    public function ver($id)
-{
-    $datos['producto'] = $this->Productos_model->obtenerPorId($id);
-
-    $this->load->view('productos_detalle', $datos);
-}   
+public function ver($id) 
+{ 
+    $producto = $this->Productos_model->obtenerPorId($id);
+     if (!$producto) {
+         redirect('productos'); return; 
+        } 
+    $datos['producto'] = $producto; $this->load->view('productos_detalle', $datos);
+ }
 }
